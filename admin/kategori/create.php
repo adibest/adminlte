@@ -103,13 +103,13 @@ if (isset($_SESSION['email'])) {
               <h3 class="box-title">Kategori</h3>
             </div>
             <!-- /.box-header -->
-            <form class="form-horizontal">
+            <form class="form-horizontal" action="proses_insert.php" method="POST">
               <div class="box-body">
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
 
                   <div class="col-sm-10"> 
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="masukkan kategori" name="namakat">
                   </div>
                 </div>
               </div>

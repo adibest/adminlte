@@ -1,3 +1,6 @@
+<?php
+$path_3 = 'kategori';
+?>
  <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active">
