@@ -4,7 +4,7 @@ $path_3 = 'kategori';
  <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li class="active">
-          <a href="#">
+          <a href="http://localhost/adminlte/admin">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -15,7 +15,7 @@ $path_3 = 'kategori';
           </a>
         <li>
           <li>
-          <a href="#">
+          <a href="http://localhost/adminlte/admin/artikel">
             <i class="fa fa-pie-chart"></i>
             <span>Artikel</span>
           </a>
