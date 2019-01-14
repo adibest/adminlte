@@ -115,14 +115,18 @@ $row    = mysqli_fetch_assoc($result);
               <div class="box-body">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Judul</label>
+                  <label class="col-sm-2 control-label">Judul</label>
+                  <div class="col-sm-10">
                   <input type="text" class="form-control" name="judul" value="<?= $row['judul']?>">
+                </div>
                 </div>
 
                 <!-- textarea -->
                 <div class="form-group">
-                  <label>Isi</label>
+                  <label class="col-sm-2 control-label">Isi</label>
+                  <div class="col-sm-10">
                   <textarea class="form-control" rows="3" name="isi" value="<?= $row['isi']?>"></textarea>
+                  </div>
                 </div>
 <?php
 include '../../config/koneksi.php';
@@ -133,39 +137,49 @@ $hasil2   = mysqli_query($konek,$sql02);
 ?>
                 <!-- select -->
                 <div class="form-group">
-                  <label>Author</label>
+                  <label class="col-sm-2 control-label">Author</label>
+                  <div class="col-sm-10">
                   <select class="form-control" name="author">
 <?php while($dataa = mysqli_fetch_assoc($hasil)) {?>
                     <option value="<?php echo $dataa['id']; ?>"><?php echo $dataa['name']; ?></option>
 <?php } ?>
                   </select>
                 </div>
+                </div>
 
                 <div class="form-group">
-                  <label>Gambar</label>
-                  <input type="text" name="gambar" class="form-control" value="<?= $row['gambar']?>">
+                  <label class="col-sm-2 control-label">Gambar</label>
+                  <div class="col-sm-10">
+                  <input type="file" name="gambar" class="form-control" value="<?= $row['gambar']?>" id="exampleInputFile">
+                </div>
                 </div>
 
                 <!-- Select multiple-->
                 <div class="form-group">
-                  <label>Status</label>
+                  <label class="col-sm-2 control-label">Status</label>
+                  <div class="col-sm-10">
                   <select class="form-control" name="status">
                     <option value="0">Non Aktif</option>
                     <option value="1">Aktif</option>
                   </select>
                 </div>
+                </div>
                 <div class="form-group">
-                  <label>Kategori</label>
+                  <label class="col-sm-2 control-label">Kategori</label>
+                  <div class="col-sm-10">
                   <select class="form-control" name="kategori">
 <?php while($data = mysqli_fetch_assoc($hasil2)) {?>
                     <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
 <?php } ?>
                   </select>
                 </div>
+                </div>
 
                 <div class="form-group">
-                  <label>Release</label>
+                  <label class="col-sm-2 control-label">Release</label>
+                  <div class="col-sm-10">
                   <input type="date" name="rilis" class="form-control" value="<?= $row['rilis']?>">
+                  </div>
                 </div>
             </div>
               </div>

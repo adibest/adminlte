@@ -11,7 +11,7 @@ if (isset($_SESSION['email'])) {
 	$kat	= $_POST['kategori'];
 	$rilis	= $_POST['rilis'];
 
-	$sql1 = "UPDATE article SET judul = '$judul', isi = '$isi', user_id = '$author', gambar = '$gambar', status = '$status',kategori_id = '$kat', rilis = '$rilis' WHERE id='$id'";
+	$sql1 = "UPDATE article SET judul = '$judul', isi = '$isi', user_id = '$author', gambar = '$gambar', status = '$status',kategori_id = '$kat', rilis = '$rilis' WHERE id='$id'";/*rilisnya pake date saja*/
 	mysqli_query($konek,$sql1);
 	header('location:index.php');
 } else {

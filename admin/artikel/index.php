@@ -116,15 +116,15 @@ if (isset($_SESSION['email'])) {
                   <th>Action</th>
                 </tr>
 <?php
-function status($stat) {
-  if ($stat == "1") {
-    return "Aktif";
-  } else {
-    return "Tidak Aktif";
-  }
-}
-
-include '../../config/koneksi.php';
+// function status($stat) {
+//   if ($stat == "1") {
+//     return "Aktif";
+//   } else {
+//     return "Tidak Aktif";
+//   }
+// }
+include '../../config/koneksi.php';//bisa juga pake function
+include '../../config/function.php';
 $nomor  = 1;
 $sql    = "SELECT article.id as id, article.judul as judul, article.isi as isi, user.name as user_name, article.gambar as gambar, article.status as status, kategori.nama as kategori_nama, article.rilis as rilis FROM article INNER JOIN user ON user.id = article.user_id INNER JOIN kategori ON kategori.id = article.kategori_id ORDER BY article.rilis";
 $result = mysqli_query($konek,$sql);
@@ -137,7 +137,7 @@ if(mysqli_num_rows($result)){
   <td><?= $row['user_name']?></td>
   <td><?= status($row['status'])?></td>
   <td><?= $row['kategori_nama']?></td>
-  <td><?= $row['rilis']?></td>
+  <td><?= date('d F Y', strtotime($row['rilis']))?></td>
   <td>
     <a href='edit.php?id=<?= $row['id'] ?>' class='btn btn-primary btn-xs'>Edit</a>
     <a href='delete.php?id=<?= $row['id'] ?>'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Hapus</a>

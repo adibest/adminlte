@@ -103,18 +103,22 @@ if (isset($_SESSION['email'])) {
               <h3 class="box-title">Artikel</h3>
             </div>
             <!-- /.box-header -->
-            <form class="form-horizontal" action="proses_insert.php" method="POST">
+            <form class="form-horizontal" action="proses_insert.php" method="POST" enctype="multipart/form-data">
               <div class="box-body">
                 <!-- text input -->
                 <div class="form-group">
-                  <label>Judul</label>
+                  <label class="col-sm-2 control-label">Judul</label>
+                   <div class="col-sm-10">
                   <input type="text" class="form-control" name="judul" placeholder="Enter ...">
+                  </div>
                 </div>
 
                 <!-- textarea -->
                 <div class="form-group">
-                  <label>Isi</label>
-                  <textarea class="form-control" rows="3" name="isi" placeholder="Enter ..."></textarea>
+                  <label class="col-sm-2 control-label">Isi</label>
+                   <div class="col-sm-10">
+                    <textarea class="form-control" rows="3" name="isi" placeholder="Enter ..."></textarea>
+                  </div>
                 </div>
 <?php
 include '../../config/koneksi.php';
@@ -125,39 +129,49 @@ $hasil2   = mysqli_query($konek,$sql02);
 ?>
                 <!-- select -->
                 <div class="form-group">
-                  <label>Author</label>
+                  <label class="col-sm-2 control-label">Author</label>
+                   <div class="col-sm-10">
                   <select class="form-control" name="author">
 <?php while($data = mysqli_fetch_assoc($hasil)) {?>
                     <option value="<?php echo $data['id']; ?>"><?php echo $data['name']; ?></option>
 <?php } ?>
                   </select>
+                  </div>
                 </div>
 
                 <div class="form-group">
-                  <label>Gambar</label>
-                  <input type="text" name="gambar" class="form-control" placeholder="Enter image link">
+                  <label class="col-sm-2 control-label">Gambar</label>
+                   <div class="col-sm-10">
+                    <input type="file" name="gambar" class="form-control" id="exampleInputFile">
+                  </div>
                 </div>
 
                 <!-- Select multiple-->
                 <div class="form-group">
-                  <label>Status</label>
-                  <select class="form-control" name="status">
-                    <option value="0">Non Aktif</option>
-                    <option value="1">Aktif</option>
-                  </select>
+                  <label class="col-sm-2 control-label">Status</label>
+                   <div class="col-sm-10">
+                    <select class="form-control" name="status">
+                      <option value="0">Non Aktif</option>
+                      <option value="1">Aktif</option>
+                    </select>
+                  </div>
                 </div>
                 <div class="form-group">
-                  <label>Kategori</label>
+                  <label class="col-sm-2 control-label">Kategori</label>
+                   <div class="col-sm-10">
                   <select class="form-control" name="kategori">
 <?php while($data = mysqli_fetch_assoc($hasil2)) {?>
                     <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
 <?php } ?>
                   </select>
                 </div>
+                </div>
 
-                <div class="form-group">
-                  <label>Release</label>
+<!--                 <div class="form-group">
+                  <label class="col-sm-2 control-label">Release</label>
+                   <div class="col-sm-10">
                   <input type="date" name="rilis" class="form-control" placeholder="Enter ...">
+                </div> -->
                 </div>
             </div>
               <!-- /.box-body -->

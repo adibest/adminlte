@@ -3,6 +3,11 @@ $path_3 = 'kategori';
 ?>
  <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
+        <?php
+        if($path_3 == 'index.php'){
+          echo "<li class='active'>"
+        }
+        ?>
         <li class="active">
           <a href="http://localhost/adminlte/admin">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
