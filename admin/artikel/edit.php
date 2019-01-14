@@ -135,8 +135,8 @@ $hasil2   = mysqli_query($konek,$sql02);
                 <div class="form-group">
                   <label>Author</label>
                   <select class="form-control" name="author">
-<?php while($data = mysqli_fetch_assoc($hasil)) {?>
-                    <option value="<?php echo $data['id']; ?>"><?php echo $data['name']; ?></option>
+<?php while($dataa = mysqli_fetch_assoc($hasil)) {?>
+                    <option value="<?php echo $dataa['id']; ?>"><?php echo $dataa['name']; ?></option>
 <?php } ?>
                   </select>
                 </div>

@@ -110,13 +110,20 @@ if (isset($_SESSION['email'])) {
                   <th style="width: 10px">No</th>
                   <th>Judul</th>
                   <th>Author</th>
-                  <th>Gambar</th>
                   <th>Status</th>
                   <th>Kategori</th>
                   <th>Release</th>
                   <th>Action</th>
                 </tr>
 <?php
+function status($stat) {
+  if ($stat == "1") {
+    return "Aktif";
+  } else {
+    return "Tidak Aktif";
+  }
+}
+
 include '../../config/koneksi.php';
 $nomor  = 1;
 $sql    = "SELECT article.id as id, article.judul as judul, article.isi as isi, user.name as user_name, article.gambar as gambar, article.status as status, kategori.nama as kategori_nama, article.rilis as rilis FROM article INNER JOIN user ON user.id = article.user_id INNER JOIN kategori ON kategori.id = article.kategori_id ORDER BY article.rilis";
@@ -128,8 +135,7 @@ if(mysqli_num_rows($result)){
   <td><?= $nomor++?></td>
   <td><?= $row['judul']?></td>
   <td><?= $row['user_name']?></td>
-  <td><?= $row['gambar']?></td>
-  <td><?= $row['status']?></td>
+  <td><?= status($row['status'])?></td>
   <td><?= $row['kategori_nama']?></td>
   <td><?= $row['rilis']?></td>
   <td>
