@@ -1,0 +1,5 @@
+15 Januari 2019
+
+tambahkan user,
+fungsi rand
+folder buat fotto

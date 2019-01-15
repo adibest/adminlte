@@ -76,7 +76,7 @@ if (isset($_SESSION['email'])) {
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
      <?php
-     include '../layouts/sidebarmenu.php';
+     include '../layouts/sidebarmenuart.php';
      ?>
     </section>
     <!-- /.sidebar -->
@@ -126,7 +126,7 @@ if (isset($_SESSION['email'])) {
 include '../../config/koneksi.php';//bisa juga pake function
 include '../../config/function.php';
 $nomor  = 1;
-$sql    = "SELECT article.id as id, article.judul as judul, article.isi as isi, user.name as user_name, article.gambar as gambar, article.status as status, kategori.nama as kategori_nama, article.rilis as rilis FROM article INNER JOIN user ON user.id = article.user_id INNER JOIN kategori ON kategori.id = article.kategori_id ORDER BY article.rilis";
+$sql    = "SELECT article.id as id, article.judul as judul, article.isi as isi, user.name as user_name, article.gambar as gambar, article.status as status, kategori.nama as kategori_nama, article.rilis as rilis FROM article INNER JOIN user ON user.id = article.user_id INNER JOIN kategori ON kategori.id = article.kategori_id ORDER BY article.rilis DESC";
 $result = mysqli_query($konek,$sql);
 if(mysqli_num_rows($result)){
   while ($row = mysqli_fetch_assoc($result)) {
@@ -145,6 +145,10 @@ if(mysqli_num_rows($result)){
 </tr>
 <?php
   }
+} else {
+?> 
+<?php 
+  echo "Data not available";
 }
 ?>
               </table>

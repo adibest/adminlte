@@ -76,7 +76,7 @@ if (isset($_SESSION['email'])) {
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
      <?php
-     include '../layouts/sidebarmenu.php';
+     include '../layouts/sidebarmenukat.php';
      ?>
     </section>
     <!-- /.sidebar -->
@@ -153,6 +153,10 @@ if(mysqli_num_rows($result)){
 </tr>
 <?php
   }
+} else {
+?>
+<?php 
+  echo "Data not available";
 }
 ?>
               </table>

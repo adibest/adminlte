@@ -15,7 +15,7 @@ if (isset($_SESSION['email'])) {
 	// $rilis	= $_POST['rilis'];
 	$rilis 	= date('Y-m-d');
 
-	move_uploaded_file($tmp_name, "../../gambar/".$nama_gambar);
+	move_uploaded_file($tmp_name, "../../gambar/".$nama_gambar);//pake fungsi rand
 
 	$sql1 = "INSERT INTO article (judul,isi,user_id,gambar,status,kategori_id,rilis) VALUES ('$judul','$isi','$author','$nama_gambar','$status','$kat','$rilis')";//untuk rilis bisa pake date
 	mysqli_query($konek,$sql1);
