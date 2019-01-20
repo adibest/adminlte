@@ -76,7 +76,7 @@ if (isset($_SESSION['email'])) {
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
      <?php
-     include '../layouts/sidebarmenuart.php';
+     include '../layouts/sidebarmenuser.php';
      ?>
     </section>
     <!-- /.sidebar -->
@@ -87,12 +87,12 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Artikel
+        User
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Artikel</li>
+        <li class="active">User</li>
       </ol>
     </section>
 
@@ -100,92 +100,42 @@ if (isset($_SESSION['email'])) {
     <section class="content">
       <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Artikel</h3>
+              <h3 class="box-title">User</h3>
             </div>
             <!-- /.box-header -->
-<?php
-include '../../config/koneksi.php';
-$id   = $_GET['id'];
-$sql2   = "SELECT * FROM article WHERE id=$id";
-$result = mysqli_query($konek,$sql2);
-$row    = mysqli_fetch_assoc($result);
-?>
-            <form class="form-horizontal" action="proses_edit.php" method="POST" enctype="multipart/form-data">
-              <input type="hidden" name="id" value="<?php echo $id; ?>">
+            <form class="form-horizontal" action="proses_insert.php" method="POST" enctype="multipart/form-data">
               <div class="box-body">
-                <!-- text input -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Judul</label>
-                  <div class="col-sm-10">
-                  <input type="text" class="form-control" name="judul" value="<?= $row['judul']?>">
-                </div>
-                </div>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Nama</label>
 
-                <!-- textarea -->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Isi</label>
-                  <div class="col-sm-10">
-                  <textarea class="form-control" rows="3" name="isi" value="<?= $row['isi']?>"></textarea>
+                  <div class="col-sm-10"> 
+                    <input type="text" class="form-control" id="inputEmail3" placeholder="Enter..." name="nama">
                   </div>
                 </div>
-<?php
-include '../../config/koneksi.php';
-$sql01    = "SELECT * FROM user";
-$hasil    = mysqli_query($konek,$sql01);
-$sql02    = "SELECT * FROM kategori";
-$hasil2   = mysqli_query($konek,$sql02);
-?>
-                <!-- select -->
                 <div class="form-group">
-                  <label class="col-sm-2 control-label">Author</label>
-                  <div class="col-sm-10">
-                  <select class="form-control" name="author">
-<?php while($dataa = mysqli_fetch_assoc($hasil)) {?>
-                    <option value="<?php echo $dataa['id']; ?>"><?php echo $dataa['name']; ?></option>
-<?php } ?>
-                  </select>
-                </div>
-                </div>
+                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Gambar</label>
                   <div class="col-sm-10">
-                  <input type="file" name="gambar" class="form-control" value="<?= $row['gambar']?>" id="exampleInputFile">
-                </div>
-                </div>
-
-                <!-- Select multiple-->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Status</label>
-                  <div class="col-sm-10">
-                  <select class="form-control" name="status">
-                    <option value="0">Non Aktif</option>
-                    <option value="1">Aktif</option>
-                  </select>
-                </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Kategori</label>
-                  <div class="col-sm-10">
-                  <select class="form-control" name="kategori">
-<?php while($data = mysqli_fetch_assoc($hasil2)) {?>
-                    <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
-<?php } ?>
-                  </select>
-                </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Release</label>
-                  <div class="col-sm-10">
-                  <input type="date" name="rilis" class="form-control" value="<?= $row['rilis']?>">
+                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="email">
                   </div>
                 </div>
-            </div>
+                <div class="form-group">
+                  <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+
+                  <div class="col-sm-10">
+                    <input type="text" class="form-control" id="inputPassword3" placeholder="Password" name="password">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-2 control-label">Foto</label>
+                  <div class="col-sm-10">
+                    <input type="file" name="gambar" class="form-control" id="exampleInputFile">
+                  </div>
+                </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
-                <a href="http://localhost/adminlte/admin/artikel" class="btn btn-default">Cancel</a>
+                <a href="http://localhost/adminlte/admin/user" class="btn btn-default">Cancel</a>
                 <button type="submit" class="btn btn-info pull-right">Submit</button>
               </div>
               <!-- /.box-footer -->

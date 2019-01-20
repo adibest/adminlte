@@ -15,16 +15,22 @@ $path_3 = 'kategori';
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li id="satu">
+        <li>
           <a href="http://localhost/adminlte/admin/kategori">
             <i class="fa fa-pie-chart"></i>
             <span>Kategori</span>
           </a>
         <li>
-          <li>
+        <li>
           <a href="http://localhost/adminlte/admin/artikel">
             <i class="fa fa-pie-chart"></i>
             <span>Artikel</span>
+          </a>
+        <li>
+        <li>
+          <a href="http://localhost/adminlte/admin/user">
+            <i class="fa fa-pie-chart"></i>
+            <span>User</span>
           </a>
         <li>
       </ul>

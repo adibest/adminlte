@@ -11,13 +11,13 @@
             <span>Kategori</span>
           </a>
         <li>
-        <li class="active">
+          <li>
           <a href="http://localhost/adminlte/admin/artikel">
             <i class="fa fa-pie-chart"></i>
             <span>Artikel</span>
           </a>
         <li>
-        <li>
+        <li class="active">
           <a href="http://localhost/adminlte/admin/user">
             <i class="fa fa-pie-chart"></i>
             <span>User</span>

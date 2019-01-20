@@ -10,14 +10,17 @@ if (isset($_SESSION['email'])) {
  	$nama_gambar 	= $_FILES['gambar']['name'];
  	$tmp_name	= $_FILES['gambar']['tmp_name'];
 
+ 	$acak = mt_rand(10000,99999);
+ 	$image_name = $acak."-".$nama_gambar;//nama di database
+
 	$status	= $_POST['status'];
 	$kat	= $_POST['kategori'];
 	// $rilis	= $_POST['rilis'];
 	$rilis 	= date('Y-m-d');
 
-	move_uploaded_file($tmp_name, "../../gambar/".$nama_gambar);//pake fungsi rand
+	move_uploaded_file($tmp_name, "../../gambar/".$image_name);//pake fungsi rand
 
-	$sql1 = "INSERT INTO article (judul,isi,user_id,gambar,status,kategori_id,rilis) VALUES ('$judul','$isi','$author','$nama_gambar','$status','$kat','$rilis')";//untuk rilis bisa pake date
+	$sql1 = "INSERT INTO article (judul,isi,user_id,gambar,status,kategori_id,rilis) VALUES ('$judul','$isi','$author','$image_name ','$status','$kat','$rilis')";//untuk rilis bisa pake date
 	mysqli_query($konek,$sql1);
 	header('location:index.php');
 } else {

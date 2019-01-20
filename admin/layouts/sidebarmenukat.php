@@ -17,4 +17,10 @@
             <span>Artikel</span>
           </a>
         <li>
+        <li>
+          <a href="http://localhost/adminlte/admin/user">
+            <i class="fa fa-pie-chart"></i>
+            <span>User</span>
+          </a>
+        <li>
       </ul>

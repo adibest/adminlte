@@ -3,3 +3,5 @@
 tambahkan user,
 fungsi rand
 folder buat fotto
+insert hapius foto
+aktifkn foto profil

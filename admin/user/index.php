@@ -76,7 +76,7 @@ if (isset($_SESSION['email'])) {
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
      <?php
-     include '../layouts/sidebarmenuart.php';
+     include '../layouts/sidebarmenuser.php';
      ?>
     </section>
     <!-- /.sidebar -->
@@ -87,12 +87,12 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Artikel
+        User
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Artikel</li>
+        <li class="active">User</li>
       </ol>
     </section>
 
@@ -100,98 +100,80 @@ if (isset($_SESSION['email'])) {
     <section class="content">
       <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Artikel</h3>
+              <h3 class="box-title">User</h3>
+              <a href="http://localhost/adminlte/admin/user/create.php" class="btn btn-primary pull-right">Create</a>
             </div>
             <!-- /.box-header -->
+            <div class="box-body">
+              <table class="table table-bordered">
+                <tr>
+                  <th style="width: 10px">No</th>
+                  <th>Nama</th>
+                  <th>Email</th>
+                  <th>Foto</th>
+                </tr>
+                <!--<tr>
+                  <td>1.</td>
+                  <td>Update software</td>
+                  <td>
+                    <a href="#" class="btn btn-primary btn-xs">edit</a>
+                    <a href="#" class="btn btn-danger btn-xs">hapus</a>
+                  </td>
+                </tr>-->
 <?php
 include '../../config/koneksi.php';
-$id   = $_GET['id'];
-$sql2   = "SELECT * FROM article WHERE id=$id";
-$result = mysqli_query($konek,$sql2);
-$row    = mysqli_fetch_assoc($result);
+$nomor  = 1;
+$sql    = "SELECT * FROM user";
+$result = mysqli_query($konek,$sql);
+/*if(mysqli_num_rows($result)>0){
+  while($row = mysqli_fetch_assoc($result)){
+    echo "
+      <tr>
+        <td>".$nomor++."</td>
+        <td>".$row['nama']."</td>
+        <td>
+          <a href='edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
+          <a href='delete.php?id=".$row['id']."'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Hapus</a>
+        </td>
+      </tr>
+    ";
+  }
+}*/
 ?>
-            <form class="form-horizontal" action="proses_edit.php" method="POST" enctype="multipart/form-data">
-              <input type="hidden" name="id" value="<?php echo $id; ?>">
-              <div class="box-body">
-                <!-- text input -->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Judul</label>
-                  <div class="col-sm-10">
-                  <input type="text" class="form-control" name="judul" value="<?= $row['judul']?>">
-                </div>
-                </div>
-
-                <!-- textarea -->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Isi</label>
-                  <div class="col-sm-10">
-                  <textarea class="form-control" rows="3" name="isi" value="<?= $row['isi']?>"></textarea>
-                  </div>
-                </div>
 <?php
-include '../../config/koneksi.php';
-$sql01    = "SELECT * FROM user";
-$hasil    = mysqli_query($konek,$sql01);
-$sql02    = "SELECT * FROM kategori";
-$hasil2   = mysqli_query($konek,$sql02);
+if(mysqli_num_rows($result)){
+  while ($row = mysqli_fetch_assoc($result)) {
 ?>
-                <!-- select -->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Author</label>
-                  <div class="col-sm-10">
-                  <select class="form-control" name="author">
-<?php while($dataa = mysqli_fetch_assoc($hasil)) {?>
-                    <option value="<?php echo $dataa['id']; ?>"><?php echo $dataa['name']; ?></option>
-<?php } ?>
-                  </select>
-                </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Gambar</label>
-                  <div class="col-sm-10">
-                  <input type="file" name="gambar" class="form-control" value="<?= $row['gambar']?>" id="exampleInputFile">
-                </div>
-                </div>
-
-                <!-- Select multiple-->
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Status</label>
-                  <div class="col-sm-10">
-                  <select class="form-control" name="status">
-                    <option value="0">Non Aktif</option>
-                    <option value="1">Aktif</option>
-                  </select>
-                </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Kategori</label>
-                  <div class="col-sm-10">
-                  <select class="form-control" name="kategori">
-<?php while($data = mysqli_fetch_assoc($hasil2)) {?>
-                    <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
-<?php } ?>
-                  </select>
-                </div>
-                </div>
-
-                <div class="form-group">
-                  <label class="col-sm-2 control-label">Release</label>
-                  <div class="col-sm-10">
-                  <input type="date" name="rilis" class="form-control" value="<?= $row['rilis']?>">
-                  </div>
-                </div>
+<tr>
+  <td><?= $nomor++?></td>
+  <td><?= $row['name']?></td>
+  <td><?= $row['email']?></td>
+  <td><img src="../../gambar_user/<?= $row['foto']?>" border="0" width="100px"></td>
+  <td>
+    <a href='edit.php?id=<?= $row['id'] ?>' class='btn btn-primary btn-xs'>Edit</a>
+    <a href='delete.php?id=<?= $row['id'] ?>'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Hapus</a>
+  </td>
+</tr>
+<?php
+  }
+} else {
+?>
+<?php 
+  echo "Data not available";
+}
+?>
+              </table>
+              <div class="box-footer clearfix">
+                <ul class="pagination pagination-sm no-margin pull-right">
+                  <li><a href="#">&laquo;</a></li>
+                  <li><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">&raquo;</a></li>
+                </ul>
+              </div>
             </div>
-              </div>
-              <!-- /.box-body -->
-              <div class="box-footer">
-                <a href="http://localhost/adminlte/admin/artikel" class="btn btn-default">Cancel</a>
-                <button type="submit" class="btn btn-info pull-right">Submit</button>
-              </div>
-              <!-- /.box-footer -->
-            </form>
             <!-- /.box-body -->
-          </div>
     </section>
     <!-- /.content -->
   </div>
