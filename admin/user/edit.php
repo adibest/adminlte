@@ -110,7 +110,7 @@ $sql2   = "SELECT * FROM user WHERE id=$id";
 $result = mysqli_query($konek,$sql2);
 $row    = mysqli_fetch_assoc($result);
 ?>
-            <form class="form-horizontal" action="proses_insert.php" method="POST" enctype="multipart/form-data">
+            <form class="form-horizontal" action="proses_edit.php" method="POST" enctype="multipart/form-data">
               <input type="hidden" name="id" value="<?php echo $id; ?>">
               <div class="box-body">
                 <div class="form-group">
@@ -139,13 +139,14 @@ $row    = mysqli_fetch_assoc($result);
                   <div class="col-sm-10">
                     <p>Masukkan gambar baru</p>
                     <input type="file" name="gambar" class="form-control" id="exampleInputFile">
+                    <input type="hidden" name="hapus_gambar" value="<?= $row['foto']?>">
                   </div>
                 </div>
               </div>
               <!-- /.box-body -->
               <div class="box-footer">
                 <a href="http://localhost/adminlte/admin/user" class="btn btn-default">Cancel</a>
-                <button type="submit" class="btn btn-info pull-right">Submit</button>
+                <button type="submit" name="update" class="btn btn-info pull-right">Submit</button>
               </div>
               <!-- /.box-footer -->
             </form>

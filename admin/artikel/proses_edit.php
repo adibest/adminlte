@@ -19,6 +19,13 @@ if (isset($_SESSION['email'])) {
 	// $rilis	= $_POST['rilis'];
 	$rilis 	= date('Y-m-d');
 
+	$sql4 = "SELECT * FROM article WHERE id ='$id'";
+ 	$hasil = mysqli_query($konek, $sql4);
+	$data = mysqli_fetch_assoc($hasil);
+	$path = "../../gambar/";
+	
+	unlink($path.$data['gambar']);
+
 	move_uploaded_file($tmp_name, "../../gambar/".$image_name);//pake fungsi rand
 
 	$sql1 = "UPDATE article SET judul = '$judul', isi = '$isi', user_id = '$author', gambar = '$image_name', status = '$status', kategori_id = '$kat', rilis = '$rilis' WHERE id='$id'";//untuk rilis bisa pake date
