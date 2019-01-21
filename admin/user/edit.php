@@ -137,6 +137,9 @@ $row    = mysqli_fetch_assoc($result);
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Foto</label>
                   <div class="col-sm-10">
+                    <p>Gambar lama</p>
+                    <img src="../../gambar_user/<?= $row['foto']?>">
+                    <br>
                     <p>Masukkan gambar baru</p>
                     <input type="file" name="gambar" class="form-control" id="exampleInputFile">
                     <input type="hidden" name="hapus_gambar" value="<?= $row['foto']?>">
