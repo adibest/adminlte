@@ -5,3 +5,8 @@ fungsi rand
 folder buat fotto
 insert hapius foto
 aktifkn foto profil
+
+20 Januari 2019
+
+yang tampil di artikel hanya yg dari user aktif sekarang
+yang bisa lihat semua hnya super admin, intine akses

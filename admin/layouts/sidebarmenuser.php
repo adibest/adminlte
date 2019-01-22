@@ -13,13 +13,13 @@
         <li>
           <li>
           <a href="http://localhost/adminlte/admin/artikel">
-            <i class="fa fa-pie-chart"></i>
+            <i class="fa fa-book"></i>
             <span>Artikel</span>
           </a>
         <li>
         <li class="active">
           <a href="http://localhost/adminlte/admin/user">
-            <i class="fa fa-pie-chart"></i>
+            <i class="fa fa-user"></i>
             <span>User</span>
           </a>
         <li>

@@ -4,7 +4,7 @@ if (isset($_SESSION['email'])) {
 	include '../../config/koneksi.php';
 	$nama = $_POST['nama'];
 	$email	= $_POST['email'];
-	$pass	= $_POST['password'];
+	$pass	= md5($_POST['password']);
  	$nama_gambar = $_FILES['gambar']['name'];
  	$tmp_name	= $_FILES['gambar']['tmp_name'];//nama sementara?nama server?
 

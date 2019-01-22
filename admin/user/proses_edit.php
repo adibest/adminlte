@@ -5,7 +5,7 @@ if (isset($_SESSION['email'])) {
 	$id = $_POST['id'];
 	$nama = $_POST['nama'];
 	$email	= $_POST['email'];
-	$pass	= $_POST['password'];
+	$pass	= md5($_POST['password']);
  	$nama_gambar 	= $_FILES['gambar']['name'];
  	$tmp_name	= $_FILES['gambar']['tmp_name'];
 
@@ -28,3 +28,4 @@ if (isset($_SESSION['email'])) {
 	header('location: ../../index.php');
 }
 ?>
+<!-- tambahkan cabang password, kan dikosongi? dan begitulah-->

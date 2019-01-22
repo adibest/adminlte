@@ -50,7 +50,7 @@ if (isset($_SESSION['email'])) {
          ?>
           <!-- User Account: style can be found in dropdown.less -->
           <?php
-          include 'layouts/user.php';
+          include 'layouts/user2.php';
           ?>
           <!-- Control Sidebar Toggle Button -->
           <li>

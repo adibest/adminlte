@@ -131,7 +131,7 @@ $row    = mysqli_fetch_assoc($result);
                   <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
 
                   <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputPassword3" placeholder="Password" name="password" value="<?= $row['password']?>">
+                    <input type="text" class="form-control" id="inputPassword3" placeholder="Password" name="password">
                   </div>
                 </div>
                 <div class="form-group">
