@@ -101,7 +101,32 @@ if (isset($_SESSION['email'])) {
       <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">User</h3>
-              <a href="http://localhost/adminlte/admin/user/create.php" class="btn btn-primary pull-right">Create</a>
+              <div class="box-tools">
+                <?php
+                $pencarian = isset($_GET['cari']) ? $_GET['cari']:'';
+                ?>
+                <form action="" method="get">
+<?php
+$role   = $_SESSION['role'];
+$rolee = $role;
+if ($rolee==1) {
+ ?><a href="http://localhost/adminlte/admin/user/create.php" class="btn btn-primary pull-right">Create</a>
+<?php             
+} else {
+  ?><a href="http://localhost/adminlte/admin/user/create.php" class="btn btn-primary pull-right disabled">Create</a>
+<?php
+}
+?>
+            <a href="http://localhost/adminlte/admin/user/index.php" class="btn btn-default pull-right">Clear</a>
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" class="form-control pull-right" placeholder="Search" name="cari" value="<?= $pencarian?>">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+                </form>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -109,8 +134,10 @@ if (isset($_SESSION['email'])) {
                 <tr>
                   <th style="width: 10px">No</th>
                   <th>Nama</th>
+                  <th>Status</th>
                   <th>Email</th>
                   <th>Foto</th>
+                  <th>Action</th>
                 </tr>
                 <!--<tr>
                   <td>1.</td>
@@ -123,30 +150,24 @@ if (isset($_SESSION['email'])) {
 <?php
 include '../../config/koneksi.php';
 $nomor  = 1;
-$sql    = "SELECT * FROM user";
+$user_saiki = $_SESSION['id'];
+$cari   = isset($_GET['cari']) ? $_GET['cari']:'';
+$sql    = "SELECT user.id as id, user.name as name, role.id as role_id, role.nama as statuse, user.email as email, user.foto as foto FROM user INNER JOIN role ON role.id = user.role_id WHERE name LIKE '%$cari%' ";
 $result = mysqli_query($konek,$sql);
-/*if(mysqli_num_rows($result)>0){
-  while($row = mysqli_fetch_assoc($result)){
-    echo "
-      <tr>
-        <td>".$nomor++."</td>
-        <td>".$row['nama']."</td>
-        <td>
-          <a href='edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-          <a href='delete.php?id=".$row['id']."'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Hapus</a>
-        </td>
-      </tr>
-    ";
-  }
-}*/
+
+$sqlauthor = "SELECT user.id as id, user.name as name, role.id as role_id, role.nama as statuse, user.email as email, user.foto as foto FROM user INNER JOIN role ON role.id = user.role_id WHERE user.id = '$user_saiki' AND name LIKE '%$cari%' ";
+$reuthor = mysqli_query($konek,$sqlauthor);
 ?>
+<!-- jika dia admin, bisa lihat semua, jika bukan... -->
 <?php
-if(mysqli_num_rows($result)){
-  while ($row = mysqli_fetch_assoc($result)) {
-?>
+if ($role == 1) {
+  if (mysqli_num_rows($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
+?>    
 <tr>
   <td><?= $nomor++?></td>
   <td><?= $row['name']?></td>
+  <td><?= $row['statuse']?></td>
   <td><?= $row['email']?></td>
   <td><img src="../../gambar_user/<?= $row['foto']?>" border="0" width="100px"></td>
   <td>
@@ -155,12 +176,52 @@ if(mysqli_num_rows($result)){
   </td>
 </tr>
 <?php
+    }
+  } else {
+    echo "Data not available";
   }
 } else {
+  if (mysqli_num_rows($reuthor)) {
+    while ($row = mysqli_fetch_assoc($reuthor)) {
 ?>
-<?php 
-  echo "Data not available";
+<tr>
+  <td><?= $nomor++?></td>
+  <td><?= $row['name']?></td>
+  <td><?= $row['statuse']?></td>
+  <td><?= $row['email']?></td>
+  <td><img src="../../gambar_user/<?= $row['foto']?>" border="0" width="100px"></td>
+  <td>
+    <a href='edit.php?id=<?= $row['id'] ?>' class='btn btn-primary btn-xs'>Edit</a>
+    <a href='delete.php?id=<?= $row['id'] ?>'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs disabled'>Hapus</a>
+  </td>
+</tr>
+<?php
+    }
+  } else {
+    echo "Data not available";
+  }
 }
+
+?>
+<?php
+// if(mysqli_num_rows($result)){
+//   while ($row = mysqli_fetch_assoc($result)) {
+?>
+<!-- <tr>
+  <td><?= $nomor++?></td>
+  <td><?= $row['name']?></td>
+  <td><?= $row['email']?></td>
+  <td><img src="../../gambar_user/<?= $row['foto']?>" border="0" width="100px"></td>
+  <td>
+    <a href='edit.php?id=<?= $row['id'] ?>' class='btn btn-primary btn-xs'>Edit</a>
+    <a href='delete.php?id=<?= $row['id'] ?>'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Hapus</a>
+  </td>
+</tr> -->
+<?php
+//   }
+// } else {
+//   echo "Data not available";
+// }
 ?>
               </table>
               <div class="box-footer clearfix">

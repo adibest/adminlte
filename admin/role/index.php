@@ -76,7 +76,7 @@ if (isset($_SESSION['email'])) {
       <!-- /.search form -->
       <!-- sidebar menu: : style can be found in sidebar.less -->
      <?php
-     include '../layouts/sidebarmenukat.php';
+     include '../layouts/sidebarmenurole.php';
      ?>
     </section>
     <!-- /.sidebar -->
@@ -87,12 +87,12 @@ if (isset($_SESSION['email'])) {
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Kategori
+        Role
         <small>Control panel</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Kategori</li>
+        <li class="active">Role</li>
       </ol>
     </section>
 
@@ -100,14 +100,24 @@ if (isset($_SESSION['email'])) {
     <section class="content">
       <div class="box">
             <div class="box-header with-border">
-              <h3 class="box-title">Kategori</h3>
+              <h3 class="box-title">Role</h3>
               <div class="box-tools">
                 <?php
                 $pencarian = isset($_GET['cari']) ? $_GET['cari']:'';
                 ?>
                 <form action="" method="get">
-                <a href="http://localhost/adminlte/admin/kategori/create.php" class="btn btn-primary pull-right">Create</a>
-                <a href="http://localhost/adminlte/admin/kategori/index.php" class="btn btn-default pull-right">Clear</a>
+<?php
+$role = $_SESSION['role'];
+$rolee = $role;
+if ($role==1) {
+ ?><a href="http://localhost/adminlte/admin/role/create.php" class="btn btn-primary pull-right">Create</a>
+<?php             
+} else {
+  ?><a href="http://localhost/adminlte/admin/role/create.php" class="btn btn-primary pull-right disabled">Create</a> 
+<?php
+}
+?>
+                <a href="http://localhost/adminlte/admin/role/index.php" class="btn btn-default pull-right">Clear</a>
                 <div class="input-group input-group-sm" style="width: 150px;">
                   <input type="text" class="form-control pull-right" placeholder="Search" name="cari" value="<?= $pencarian?>">
 
@@ -124,7 +134,6 @@ if (isset($_SESSION['email'])) {
                 <tr>
                   <th style="width: 10px">No</th>
                   <th>Nama</th>
-                  <th>Pembuat</th>
                   <th>Action</th>
                 </tr>
                 <!--<tr>
@@ -139,43 +148,45 @@ if (isset($_SESSION['email'])) {
 include '../../config/koneksi.php';
 $nomor  = 1;
 $cari   = isset($_GET['cari']) ? $_GET['cari']:'';
-$sql    = "SELECT kategori.id as id, kategori.nama as nama, user.name as user_name FROM kategori INNER JOIN user ON user.id = kategori.user_id WHERE nama LIKE '%$cari%' ";
+$sql    = "SELECT * FROM role WHERE nama LIKE '%$cari%' ";
 $result = mysqli_query($konek,$sql);
 
-/*if(mysqli_num_rows($result)>0){
-  while($row = mysqli_fetch_assoc($result)){
-    echo "
-      <tr>
-        <td>".$nomor++."</td>
-        <td>".$row['nama']."</td>
-        <td>
-          <a href='edit.php?id=".$row['id']."' class='btn btn-primary btn-xs'>Edit</a>
-          <a href='delete.php?id=".$row['id']."'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Hapus</a>
-        </td>
-      </tr>
-    ";
-  }
-}*/
 ?>
 <?php
-if(mysqli_num_rows($result)){
-  while ($row = mysqli_fetch_assoc($result)) {
+if ($rolee == 1) {
+  if(mysqli_num_rows($result)){
+    while ($row = mysqli_fetch_assoc($result)) {
 ?>
 <tr>
   <td><?= $nomor++?></td>
   <td><?= $row['nama']?></td>
-  <td><?= $row['user_name']?></td>
   <td>
     <a href='edit.php?id=<?= $row['id'] ?>' class='btn btn-primary btn-xs'>Edit</a>
     <a href='delete.php?id=<?= $row['id'] ?>'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs'>Hapus</a>
   </td>
 </tr>
 <?php
+    }
+  } else {
+    echo "Data not available";
   }
 } else {
+  if (mysqli_num_rows($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
 ?>
-<?php 
-  echo "Data not available";
+<tr>
+  <td><?= $nomor++?></td>
+  <td><?= $row['nama']?></td>
+  <td>
+    <a href='edit.php?id=<?= $row['id'] ?>' class='btn btn-primary btn-xs disabled'>Edit</a>
+    <a href='delete.php?id=<?= $row['id'] ?>'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs disabled'>Hapus</a>
+  </td>
+</tr>
+<?php
+    }
+  } else {
+    echo "Data not available";
+  }
 }
 ?>
               </table>

@@ -38,7 +38,7 @@ if (isset($_SESSION['email'])) {
         <ul class="nav navbar-nav">
           <!-- Messages: style can be found in dropdown.less-->
           <?php
-          include 'layouts/messages.php';
+          include 'layouts/messages2.php';
           ?>
           <!-- Notifications: style can be found in dropdown.less -->
           <?php 
@@ -818,7 +818,7 @@ if (isset($_SESSION['email'])) {
 <!-- ./wrapper -->
 
 <?php
-include 'layout/script.php';
+include 'layouts/script.php';
 ?>
 </body>
 </html>

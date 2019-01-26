@@ -5,6 +5,7 @@ if (isset($_SESSION['email'])) {
 	$nama = $_POST['nama'];
 	$email	= $_POST['email'];
 	$pass	= md5($_POST['password']);
+	$roladee = $_POST['roled'];
  	$nama_gambar = $_FILES['gambar']['name'];
  	$tmp_name	= $_FILES['gambar']['tmp_name'];//nama sementara?nama server?
 
@@ -13,7 +14,7 @@ if (isset($_SESSION['email'])) {
 
 	move_uploaded_file($tmp_name, "../../gambar_user/".$image_name);//pake fungsi rand
 
-	$sql1 = "INSERT INTO user (name,email,password,foto) VALUES ('$nama','$email','$pass','$image_name')";//untuk rilis bisa pake date
+	$sql1 = "INSERT INTO user (name,role_id,email,password,foto) VALUES ('$nama','$roladee','$email','$pass','$image_name')";//
 	mysqli_query($konek,$sql1);
 	header('location:index.php');
 } else {

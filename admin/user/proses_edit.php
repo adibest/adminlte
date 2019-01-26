@@ -4,6 +4,7 @@ if (isset($_SESSION['email'])) {
 	include '../../config/koneksi.php';
 	$id = $_POST['id'];
 	$nama = $_POST['nama'];
+	$roladee = $_POST['roled'];
 	$email	= $_POST['email'];
 	$pass	= md5($_POST['password']);
  	$nama_gambar 	= $_FILES['gambar']['name'];
@@ -17,12 +18,29 @@ if (isset($_SESSION['email'])) {
 	$data = mysqli_fetch_assoc($hasil);
 	$path = "../../gambar_user/";
 	
-	unlink($path.$data['foto']);
+	if ($nama_gambar!='') {
+		unlink($path.$data['foto']);
+	} else {
+		echo "semoga foto gak kehapus";
+	}
+	
 
 	move_uploaded_file($tmp_name, "../../gambar_user/".$image_name);//pake fungsi rand
 
-	$sql1 = "UPDATE user SET name ='$nama', email = '$email', password = '$pass', foto = '$image_name' WHERE id='$id'";
-	mysqli_query($konek,$sql1);
+	$sql1 = "UPDATE user SET name ='$nama', role_id = '$roladee',email = '$email', password = '$pass', foto = '$image_name' WHERE id='$id'";//passwor dan foto diganti
+	$sql2 = "UPDATE user SET name ='$nama', role_id = '$roladee',email = '$email', foto = '$image_name' WHERE id='$id'";//foto diganti pasword kagak
+	$sql3 = "UPDATE user SET name ='$nama', role_id = '$roladee',email = '$email', password = '$pass' WHERE id='$id'";//paswod ganti foto kagak
+	$sql5 = "UPDATE user SET name ='$nama', role_id = '$roladee',email = '$email' WHERE id='$id'";//paswod dan foto gak diganti
+
+	if (($pass = '') AND ($nama_gambar = '')) {
+		mysqli_query($konek,$sql5);
+	} elseif ($pass = '') {
+		mysqli_query($konek,$sql2);
+	} elseif ($nama_gambar = '') {
+		mysqli_query($konek,$sql3);
+	} else {
+		mysqli_query($konek,$sql1);
+	}
 	header('location:index.php');
 } else {
 	header('location: ../../index.php');

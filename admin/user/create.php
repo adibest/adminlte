@@ -56,7 +56,7 @@ if (isset($_SESSION['email'])) {
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $_SESSION['photo']?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$_SESSION['photo']?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['name']?></p>
@@ -117,6 +117,21 @@ if (isset($_SESSION['email'])) {
 
                   <div class="col-sm-10">
                     <input type="email" class="form-control" id="inputEmail3" placeholder="Email" name="email">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Status</label>
+<?php
+include '../../config/koneksi.php';
+$sql01    = "SELECT * FROM role";
+$hasil    = mysqli_query($konek,$sql01);
+?>
+                  <div class="col-sm-10">
+                    <select class="form-control" name="roled">
+<?php while($data = mysqli_fetch_assoc($hasil)) {?>
+                    <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
+<?php } ?>
+                  </select>
                   </div>
                 </div>
                 <div class="form-group">

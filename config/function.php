@@ -19,9 +19,9 @@
 // }
 function status($stat) {
   if ($stat == "1") {
-    return "Aktif";
+    return "<em class='btn btn-primary btn-xs'>Edited</em>";
   } else {
-    return "Tidak Aktif";
+    return "<em class='btn btn-danger btn-xs'>Draft</em>";
   }
 }
 

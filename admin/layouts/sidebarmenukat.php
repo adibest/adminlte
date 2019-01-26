@@ -18,6 +18,12 @@
           </a>
         <li>
         <li>
+          <a href="http://localhost/adminlte/admin/role">
+            <i class="fa fa-user-plus"></i>
+            <span>Role</span>
+          </a>
+        </li>
+        <li>
           <a href="http://localhost/adminlte/admin/user">
             <i class="fa fa-user"></i>
             <span>User</span>

@@ -8,10 +8,11 @@ if(!empty($email) && !empty($pass)) {
 	$query		= mysqli_query($konek, $sql);
 	$row 		= mysqli_fetch_assoc($query);
 	if (mysqli_num_rows($query)>0) {
-		$_SESSION['id']	= $id;
+		$_SESSION['id']	= $row['id'];
 		$_SESSION['email']	= $email;
 		$_SESSION['name']	= $row['name'];
 		$_SESSION['photo']	= "../gambar_user/".$row['foto'];
+		$_SESSION['role']	= $row['role_id'];
 		
 		header('location: ../admin/index.php');
 	} else {

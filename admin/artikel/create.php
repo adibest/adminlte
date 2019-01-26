@@ -56,7 +56,7 @@ if (isset($_SESSION['email'])) {
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $_SESSION['photo']?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$_SESSION['photo']?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['name']?></p>
@@ -117,31 +117,7 @@ if (isset($_SESSION['email'])) {
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Isi</label>
                   <div class="col-sm-10">
-                    <!-- <textarea class="form-control" rows="3" name="isi" placeholder="Enter ..."></textarea> -->
-                      <div class="box">
-            <div class="box-header">
-              <h3 class="box-title">Bootstrap WYSIHTML5
-                <small>Simple and fast</small>
-              </h3>
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-default btn-sm" data-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                  <i class="fa fa-minus"></i></button>
-                <button type="button" class="btn btn-default btn-sm" data-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                  <i class="fa fa-times"></i></button>
-              </div>
-              <!-- /. tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body pad">
-              <form>
-                <textarea class="textarea" placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;"></textarea>
-              </form>
-            </div>
-          </div>
+                    <textarea class="form-control" rows="3" name="isi" placeholder="Enter ..."></textarea>
                   </div>
                 </div>
 <?php
@@ -152,16 +128,16 @@ $sql02    = "SELECT * FROM kategori";
 $hasil2   = mysqli_query($konek,$sql02);
 ?>
                 <!-- select -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label class="col-sm-2 control-label">Author</label>
                    <div class="col-sm-10">
                   <select class="form-control" name="author">
-<?php while($data = mysqli_fetch_assoc($hasil)) {?>
-                    <option value="<?php echo $data['id']; ?>"><?php echo $data['name']; ?></option>
-<?php } ?>
+<?php //while($data = mysqli_fetch_assoc($hasil)) {?>
+                    <option value="<?php //echo $data['id']; ?>"><?php //echo $data['name']; ?></option>
+<?php //} ?>
                   </select>
                   </div>
-                </div>
+                </div >-->
 
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Gambar</label>
@@ -171,7 +147,7 @@ $hasil2   = mysqli_query($konek,$sql02);
                 </div>
 
                 <!-- Select multiple-->
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label class="col-sm-2 control-label">Status</label>
                    <div class="col-sm-10">
                     <select class="form-control" name="status">
@@ -179,7 +155,7 @@ $hasil2   = mysqli_query($konek,$sql02);
                       <option value="1">Aktif</option>
                     </select>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Kategori</label>
                    <div class="col-sm-10">
@@ -414,9 +390,14 @@ $hasil2   = mysqli_query($konek,$sql02);
   <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
+<!-- jQuery 3 -->
+<script src="/localhost/adminlte/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- CK Editor -->
+<script src="/localhost/adminlte/AdminLTE-2.4.5/bower_components/ckeditor/ckeditor.js"></script>
 <!-- Bootstrap WYSIHTML5 -->
-<script src="localhost/adminlte/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="/localhost/adminlte/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <script>
+
 
 <?php
 include '../layouts/script.php';

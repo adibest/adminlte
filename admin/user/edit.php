@@ -56,7 +56,7 @@ if (isset($_SESSION['email'])) {
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $_SESSION['photo']?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$_SESSION['photo']?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['name']?></p>
@@ -128,6 +128,21 @@ $row    = mysqli_fetch_assoc($result);
                   </div>
                 </div>
                 <div class="form-group">
+                  <label for="inputEmail3" class="col-sm-2 control-label">Status</label>
+<?php
+include '../../config/koneksi.php';
+$sql01    = "SELECT * FROM role";
+$hasil    = mysqli_query($konek,$sql01);
+?>
+                  <div class="col-sm-10">
+                    <select class="form-control" name="roled">
+<?php while($data = mysqli_fetch_assoc($hasil)) {?>
+                    <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
+<?php } ?>
+                  </select>
+                  </div>
+                </div>
+                <div class="form-group">
                   <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
 
                   <div class="col-sm-10">
@@ -138,7 +153,7 @@ $row    = mysqli_fetch_assoc($result);
                   <label class="col-sm-2 control-label">Foto</label>
                   <div class="col-sm-10">
                     <p>Gambar lama</p>
-                    <img src="../../gambar_user/<?= $row['foto']?>">
+                    <img src="../../gambar_user/<?= $row['foto']?>"  border="0" width="200px">
                     <br>
                     <p>Masukkan gambar baru</p>
                     <input type="file" name="gambar" class="form-control" id="exampleInputFile">

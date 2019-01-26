@@ -101,7 +101,22 @@ if (isset($_SESSION['email'])) {
       <div class="box">
             <div class="box-header with-border">
               <h3 class="box-title">Artikel</h3>
+              <div class="box-tools">
+                <?php
+                $pencarian = isset($_GET['cari']) ? $_GET['cari']:'';
+                ?>
+                <form action="" method="get">
               <a href="http://localhost/adminlte/admin/artikel/create.php" class="btn btn-primary pull-right">Create</a>
+              <a href="http://localhost/adminlte/admin/artikel/index.php" class="btn btn-default pull-right">Clear</a>
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" class="form-control pull-right" placeholder="Search" name="cari" value="<?= $pencarian?>">
+
+                  <div class="input-group-btn">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                  </div>
+                </div>
+                </form>
+              </div>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -126,10 +141,18 @@ if (isset($_SESSION['email'])) {
 include '../../config/koneksi.php';//bisa juga pake function
 include '../../config/function.php';
 $nomor  = 1;
-$sql    = "SELECT article.id as id, article.judul as judul, article.isi as isi, user.name as user_name, article.gambar as gambar, article.status as status, kategori.nama as kategori_nama, article.rilis as rilis FROM article INNER JOIN user ON user.id = article.user_id INNER JOIN kategori ON kategori.id = article.kategori_id ORDER BY article.rilis DESC";
+$cari   = isset($_GET['cari']) ? $_GET['cari']:'';
+$user_id = $_SESSION['id'];
+$rolee = $_SESSION['role'];
+
+$sq = "SELECT article.id as id, article.judul as judul, article.isi as isi, user.name as user_name, article.gambar as gambar, article.status as status, kategori.nama as kategori_nama, article.rilis as rilis FROM article INNER JOIN user ON user.id = article.user_id INNER JOIN kategori ON kategori.id = article.kategori_id WHERE article.judul LIKE '%$cari%' ORDER BY article.rilis DESC";
+
+$sql    = "SELECT article.id as id, article.judul as judul, article.isi as isi, user.name as user_name, article.gambar as gambar, article.status as status, kategori.nama as kategori_nama, article.rilis as rilis FROM article INNER JOIN user ON user.id = article.user_id INNER JOIN kategori ON kategori.id = article.kategori_id WHERE article.user_id = '$user_id' AND judul LIKE '%$cari%' ORDER BY article.rilis DESC";
+$resul =mysqli_query($konek,$sq);
 $result = mysqli_query($konek,$sql);
-if(mysqli_num_rows($result)){
-  while ($row = mysqli_fetch_assoc($result)) {
+if ($rolee == 1 OR $rolee ==  3) {
+  if(mysqli_num_rows($resul)){
+    while ($row = mysqli_fetch_assoc($resul)) {
 ?>
 <tr>
   <td><?= $nomor++?></td>
@@ -144,11 +167,31 @@ if(mysqli_num_rows($result)){
   </td>
 </tr>
 <?php
+    }
+  } else {
+    echo "Data not available";
   }
 } else {
-?> 
-<?php 
-  echo "Data not available";
+  if (mysqli_num_rows($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
+?>
+<tr>
+  <td><?= $nomor++?></td>
+  <td><?= $row['judul']?></td>
+  <td><?= $row['user_name']?></td>
+  <td><?= status($row['status'])?></td>
+  <td><?= $row['kategori_nama']?></td>
+  <td><?= date('d F Y', strtotime($row['rilis']))?></td>
+  <td>
+    <a href='edit.php?id=<?= $row['id'] ?>' class='btn btn-primary btn-xs disabled'>Edit</a>
+    <a href='delete.php?id=<?= $row['id'] ?>'onclick='javascript:return confirm(\"Apakah anda yakin ingin menghapus data ini?\")' class='btn btn-danger btn-xs disabled'>Hapus</a>
+  </td>
+</tr>
+<?php
+    }
+  } else {
+    echo "Data not available";
+  }
 }
 ?>
               </table>

@@ -10,14 +10,14 @@
             <i class="fa fa-pie-chart"></i>
             <span>Kategori</span>
           </a>
-        </li>
-        <li class="active">
+        <li>
+          <li>
           <a href="http://localhost/adminlte/admin/artikel">
             <i class="fa fa-book"></i>
             <span>Artikel</span>
           </a>
-        </li>
         <li>
+        <li class="active">
           <a href="http://localhost/adminlte/admin/role">
             <i class="fa fa-user-plus"></i>
             <span>Role</span>
@@ -28,5 +28,5 @@
             <i class="fa fa-user"></i>
             <span>User</span>
           </a>
-        </li>
+        <li>
       </ul>

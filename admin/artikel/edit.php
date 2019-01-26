@@ -56,7 +56,7 @@ if (isset($_SESSION['email'])) {
       <!-- Sidebar user panel -->
       <div class="user-panel">
         <div class="pull-left image">
-          <img src="<?php echo $_SESSION['photo']?>" class="img-circle" alt="User Image">
+          <img src="<?php echo "../".$_SESSION['photo']?>" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
           <p><?php echo $_SESSION['name']?></p>
@@ -125,7 +125,7 @@ $row    = mysqli_fetch_assoc($result);
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Isi</label>
                   <div class="col-sm-10">
-                  <textarea class="form-control" rows="3" name="isi" value="<?= $row['isi']?>"></textarea>
+                  <textarea class="form-control" rows="3" name="isi"><?= $row['isi']?></textarea>
                   </div>
                 </div>
 <?php
@@ -134,18 +134,20 @@ $sql01    = "SELECT * FROM user";
 $hasil    = mysqli_query($konek,$sql01);
 $sql02    = "SELECT * FROM kategori";
 $hasil2   = mysqli_query($konek,$sql02);
+$sql03    = "SELECT * FROM article";
+$hasil3   = mysqli_query($konek,$sql03);
 ?>
                 <!-- select -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label class="col-sm-2 control-label">Author</label>
                   <div class="col-sm-10">
                   <select class="form-control" name="author">
-<?php while($dataa = mysqli_fetch_assoc($hasil)) {?>
-                    <option value="<?php echo $dataa['id']; ?>"><?php echo $dataa['name']; ?></option>
-<?php } ?>
+<?php// while($dataa = mysqli_fetch_assoc($hasil)) {?>
+                    <option value="<?php// echo $dataa['id']; ?>"><?php// echo $dataa['name']; ?></option>
+<?php //} ?>
                   </select>
                 </div>
-                </div>
+                </div> -->
 
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Gambar</label>
@@ -155,7 +157,7 @@ $hasil2   = mysqli_query($konek,$sql02);
                 </div>
 
                 <!-- Select multiple-->
-                <div class="form-group">
+                <!-- <div class="form-group">
                   <label class="col-sm-2 control-label">Status</label>
                   <div class="col-sm-10">
                   <select class="form-control" name="status">
@@ -163,14 +165,17 @@ $hasil2   = mysqli_query($konek,$sql02);
                     <option value="1">Aktif</option>
                   </select>
                 </div>
-                </div>
+                </div> -->
                 <div class="form-group">
                   <label class="col-sm-2 control-label">Kategori</label>
                   <div class="col-sm-10">
                   <select class="form-control" name="kategori">
 <?php while($data = mysqli_fetch_assoc($hasil2)) {?>
-                    <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
-<?php } ?>
+<?php if($data['id']==$row['kategori_id']){?>
+                <option value="<?php echo $data['id']; ?>"selected><?php echo $data['nama']; ?></option>
+<?php }else {?>
+                <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
+<?php }} ?>
                   </select>
                 </div>
                 </div>
