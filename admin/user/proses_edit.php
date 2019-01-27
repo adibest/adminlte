@@ -6,7 +6,8 @@ if (isset($_SESSION['email'])) {
 	$nama = $_POST['nama'];
 	$roladee = $_POST['roled'];
 	$email	= $_POST['email'];
-	$pass	= md5($_POST['password']);
+	$word = $_POST['password'];
+	$pass	= md5($word);
  	$nama_gambar 	= $_FILES['gambar']['name'];
  	$tmp_name	= $_FILES['gambar']['tmp_name'];
 
@@ -18,10 +19,16 @@ if (isset($_SESSION['email'])) {
 	$data = mysqli_fetch_assoc($hasil);
 	$path = "../../gambar_user/";
 	
-	if ($nama_gambar!='') {
-		unlink($path.$data['foto']);
-	} else {
-		echo "semoga foto gak kehapus";
+	// if ($nama_gambar!='') {
+	// 	unlink($path.$data['foto']);
+	// } else {
+	// 	echo "semoga foto gak kehapus";
+	// }
+
+	if (!empty($nama_gambar)) {
+    	unlink($path.$data['foto']);   
+	} else {  
+	    echo "Foto tidak di rubah";
 	}
 	
 
@@ -32,11 +39,11 @@ if (isset($_SESSION['email'])) {
 	$sql3 = "UPDATE user SET name ='$nama', role_id = '$roladee',email = '$email', password = '$pass' WHERE id='$id'";//paswod ganti foto kagak
 	$sql5 = "UPDATE user SET name ='$nama', role_id = '$roladee',email = '$email' WHERE id='$id'";//paswod dan foto gak diganti
 
-	if (($pass = '') AND ($nama_gambar = '')) {
+	if (empty($word) AND (isset($nama_gambar) && empty($nama_gambar))) {
 		mysqli_query($konek,$sql5);
-	} elseif ($pass = '') {
+	} elseif (empty($word)) {
 		mysqli_query($konek,$sql2);
-	} elseif ($nama_gambar = '') {
+	} elseif (isset($nama_gambar) && empty($nama_gambar)) {
 		mysqli_query($konek,$sql3);
 	} else {
 		mysqli_query($konek,$sql1);

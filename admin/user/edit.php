@@ -137,8 +137,11 @@ $hasil    = mysqli_query($konek,$sql01);
                   <div class="col-sm-10">
                     <select class="form-control" name="roled">
 <?php while($data = mysqli_fetch_assoc($hasil)) {?>
-                    <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
-<?php } ?>
+<?php if($data['id']==$row['role_id']){?>
+                    <option value="<?php echo $data['id']; ?>" selected><?php echo $data['nama']; ?></option>
+<?php }else {?>
+                <option value="<?php echo $data['id']; ?>"><?php echo $data['nama']; ?></option>
+<?php }} ?>
                   </select>
                   </div>
                 </div>
